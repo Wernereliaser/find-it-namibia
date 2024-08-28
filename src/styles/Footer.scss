@@ -1,0 +1,33 @@
+.footer {
+    padding-bottom: 10px;
+    background-color: $dark-blue;
+    ;
+
+
+
+    H4 {
+        color: $white-color;
+        font-weight: $font-weight-bold;
+        font-size: $font-size-lg;
+    }
+
+    .ft-list {
+        a {
+            color: $white-color;
+        }
+    }
+
+    .ft-title {
+        font-size: $font-size-md;
+        font-weight: $font-weight-bold;
+        color: $white-color;
+    }
+
+    .ft-line {
+        height: 5px;
+        background-color: $white-color;
+        margin-left: 5%;
+        margin-right: 5%;
+
+    }
+}

@@ -1,0 +1,44 @@
+//btn
+
+.uk-button {
+  border-radius: 5px;
+
+  &.uk-button-primary {
+    background-color: $dark-blue;
+  }
+
+  &.secondary {
+    --tw-bg-opacity: 1;
+    background-color: hsla(var(--p) / var(--tw-bg-opacity, 1));
+    --tw-border-opacity: 1;
+    border-color: hsla(var(--p) / var(--tw-border-opacity, 1));
+    --tw-text-opacity: 1;
+    color: hsla(var(--pc) / var(--tw-text-opacity, 1));
+  }
+}
+
+.uk-card {
+  border-radius: 5px;
+}
+
+//out
+.register,
+.login,
+.landing {
+  background-color: $dark-grey-color;
+
+
+}
+
+
+//hero section
+.hero-section {
+  background-color: $dark-blue;
+
+  h1 {
+    font-weight: 800;
+    font-size: 3.75rem;
+    line-height: 1;
+    color: $white-color;
+  }
+}

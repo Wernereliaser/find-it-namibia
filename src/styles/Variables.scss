@@ -1,0 +1,50 @@
+$font-size-xs: 0.7em;
+$font-size-sm: 0.75rem;
+$font-size: 0.8rem;
+$font-size-md: 1.02rem;
+$font-size-lg: 1.2rem;
+
+$font-weight: 400;
+$font-weight-semibold: 600;
+$font-weight-bold: 800;
+
+
+$primary-color: #991f2a;
+$secondary-color: #2e6ac3;
+$darker-secondary-color: #4365ae;
+$grey-color: #a9a9ab;
+$dark-grey-color: #666;
+$dark-blue:rgb(17 24 39);
+$light-grey-color: #ccc;
+$black-color: #1d1e1f;
+$white-color: #fff;
+$muted-color: #d2d2d2;
+$light-bg: #efefef;
+$hover-color: #ffffdd;
+$drawer-color: #abb8c3;
+$tertiary-color: #fed082;
+
+
+$secondary-btn: #2e6ac3;
+$secondary-btn-hover: #2e6ac3;
+$danger-btn: #ed1c24;
+$danger-btn-hover: #ed1c24;
+
+
+$success-color: #32d296;
+$danger-color: #ed1c24;
+$warning-color: #faa05a;
+
+$border-radius: 3px;
+$border-color: #f0f0f0;
+
+
+$extraBig-device: "only screen and (min-width: 1600px)";
+$laptop-device: "only screen and (min-width: 1200px) and (max-width: 1599px)";
+$desktop-device: "only screen and (min-width: 992px) and (max-width: 1199px)";
+$tablet-device: "only screen and (min-width: 768px) and (max-width: 991px)";
+$large-mobile: "only screen and (max-width: 767px)";
+$small-mobile: "only screen and (max-width: 575px)";
+$extra-small-mobile: "only screen and (max-width: 479px)";
+
+$drawer-width: 220px;

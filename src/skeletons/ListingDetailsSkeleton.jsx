@@ -1,6 +1,5 @@
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
-import { v4 as uuidv4 } from 'uuid';
 
 function ListingDetailsSkeleton() {
   return (
@@ -16,8 +15,8 @@ function ListingDetailsSkeleton() {
               <ul className="space-y-6">
                 {Array(4)
                   .fill()
-                  .map((item) => (
-                    <li key={uuidv4()} className="listing-info-list-item">
+                  .map((item, index) => (
+                    <li key={index} className="listing-info-list-item">
                       <Skeleton width={`100%`} height={35} />
                     </li>
                   ))}

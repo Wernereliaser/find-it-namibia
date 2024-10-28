@@ -51,7 +51,7 @@ const UploadedImageThumb = (props: IProps) => {
               <button onClick={() => deleteImage(1)} type="button" aria-label="Delete image" className="delete-btn">
                 <DeleteIcon className="h-3 w-3" />
               </button>
-              <img className="w-full h-full border border-gray-200 rounded object-cover" src={src} />
+              <img className="w-full h-full border border-gray-200 rounded object-cover" src={src} alt=''/>
             </div>
           ))}
         </div>

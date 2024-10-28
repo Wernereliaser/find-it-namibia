@@ -4,7 +4,7 @@ import { useAppContext } from '../../shared/context/Context';
 import FormCard from '../../components/FormCard';
 import FormContainer from '../../components/FormContainer';
 import TextInput from '../../components/TextInput';
-import { LoadingEllipsis } from '../../shared/loading/Loading';
+import { Loading } from '../../shared/loading/Loading';
 import FormHeading from '../../components/FormHeading';
 
 function Login() {
@@ -41,11 +41,11 @@ function Login() {
     setLoading(false);
   };
 
-  if (store.auth.loading) return <LoadingEllipsis fullHeight />;
+  if (store.auth.loading) return <Loading fullHeight />;
   if (store.auth.me && !store.auth.loading) {
     const state = location.state as { from: Location };
     if (state && state.from) return <Navigate to={state.from.pathname} />;
-    return <Navigate to="/listing" />;
+    return <Navigate to="/listings" />;
   }
 
   return (

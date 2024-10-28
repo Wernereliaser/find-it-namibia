@@ -32,22 +32,24 @@ function ForgotPassword() {
     <FormContainer>
       <FormCard>
         <FormHeading>Reset password</FormHeading>
-        <div className="mb-4">
-          <TextInput
-            label="Email"
-            id="email"
-            name="email"
-            type="email"
-            value={loginForm.email}
-            onChange={onEmailChange}
-            required />
-        </div>
-        <button
-          type="submit"
-          className="btn btn-primary btn-block mx-0"
-          disabled={loading}>
-          Send reset link
-        </button>
+        <form onSubmit={onSubmit}>
+          <div className="mb-4">
+            <TextInput
+              label="Email"
+              id="email"
+              name="email"
+              type="email"
+              value={loginForm.email}
+              onChange={onEmailChange}
+              required />
+          </div>
+          <button
+            type="submit"
+            className="btn btn-primary btn-block mx-0"
+            disabled={loading}>
+            Send reset link
+          </button>
+        </form>
         <p className="text-center text-md mt-4">
           <Link to="/" className="text-primary hover:underline">
             Back

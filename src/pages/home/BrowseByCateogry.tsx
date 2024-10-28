@@ -11,8 +11,8 @@ function BrowseByCateogry() {
                 Provide another discription about the site or any information about the selling or renting of properties.
             </p>
             <div className="grid sm:grid-cols-2 grid-cols-1 gap-3 md:gap-8">
-                <CategoryBlock bgImage={ForSaleCategoryBg} categoryName="For Sale" to="/category" />
-                <CategoryBlock bgImage={ForRentCategoryBg} categoryName="For Rent" to="/category" />
+                <CategoryBlock bgImage={ForSaleCategoryBg} categoryName="For Sale" to="/category/sale" />
+                <CategoryBlock bgImage={ForRentCategoryBg} categoryName="For Rent" to="/category/rent" />
             </div>
         </div>
     );

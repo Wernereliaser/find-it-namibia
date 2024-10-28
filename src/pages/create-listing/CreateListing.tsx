@@ -25,25 +25,28 @@ function CreateListing() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (user) {
-      setLoading(true);
-      const selected = store.property.selected;
-      const imageUrls: string[] = [];
-      for (const image of selecteImages) {
-        const downloadURL = selecteImages ? await uploadFile(image, "/rental") : "";
-        imageUrls.push(downloadURL);
+      try {
+        setLoading(true);
+        const selected = store.property.selected;
+        const imageUrls: string[] = [];
+        for (const image of selecteImages) {
+          const downloadURL = selecteImages ? await uploadFile(image, "/rental") : "";
+          imageUrls.push(downloadURL);
+        }
+
+        item.images = [...item.images, ...imageUrls];
+        item.uid = user.uid;
+
+        if (selected) await update(item);
+        else await create(item);
+        setLoading(false);
+        onCancel();
+        toast.success(`Success!`, { autoClose: 500 });
+        navigate("/listings");
+      } catch (error) {
+        console.log(error);
       }
-
-      item.images = [...item.images, ...imageUrls];
-      item.uid = user.uid;
-
-      if (selected) await update(item);
-      else await create(item);
-      setLoading(false);
-      onCancel();
-      toast.success(`Success!`, { autoClose: 500 });
-      navigate("/my-listings");
     }
-    toast.error(`Failed!`, { autoClose: 500 });
   };
 
   const update = async (product: IProperty) => {
@@ -65,11 +68,15 @@ function CreateListing() {
   };
 
   const deleteImage = async (index: number) => {
-    const updatedImages = [...previewImages];
-    updatedImages.splice(index, 1);
-    setPreviewImages(updatedImages);
-    await api.property.update({ ...item, images: updatedImages })
-    await api.property.deleteImage(previewImages[index])
+    try {
+      const updatedImages = [...previewImages];
+      updatedImages.splice(index, 1);
+      setPreviewImages(updatedImages);
+      await api.property.update({ ...item, images: updatedImages })
+      await api.property.deleteImage(previewImages[index])
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

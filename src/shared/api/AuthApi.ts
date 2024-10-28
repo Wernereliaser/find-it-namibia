@@ -76,21 +76,32 @@ export default class AuthApi {
   }
 
   async login(email: string, password: string) {
-    setPersistence(auth, browserLocalPersistence).then(() => {
-      return signInWithEmailAndPassword(auth, email, password);
-    }).catch((error) => {
+    try {
+      await setPersistence(auth, browserLocalPersistence);
+      const credential = await signInWithEmailAndPassword(auth, email, password);
+      return credential.user;
+    } catch (error) {
       console.log(error);
       return null;
-    });
-
-    const credential = await signInWithEmailAndPassword(auth, email, password).catch((error) => {
-      console.log(error);
-      return null;
-    });
-
-    if (credential) return credential.user;
-    return credential;
+    }
   }
+
+  // async login(email: string, password: string) {
+  //   setPersistence(auth, browserLocalPersistence).then(() => {
+  //     return signInWithEmailAndPassword(auth, email, password);
+  //   }).catch((error) => {
+  //     console.log(error);
+  //     return null;
+  //   });
+
+  //   const credential = await signInWithEmailAndPassword(auth, email, password).catch((error) => {
+  //     console.log(error);
+  //     return null;
+  //   });
+
+  //   if (credential) return credential.user;
+  //   return credential;
+  // }
 
   async logout() {
     try {

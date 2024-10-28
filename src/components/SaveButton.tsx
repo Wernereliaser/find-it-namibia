@@ -1,16 +1,19 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import { ReactComponent as HeartOutLineIcon } from '../assets/svg/heart-outline.svg';
 import { ReactComponent as HeartFilledIcon } from '../assets/svg/heart-filled.svg';
-
-import { FavoritesContext } from '../shared/context/FavoritesContext';
+import useFavoritesProvider from '../shared/context/useFavoritesProvider';
 import { auth } from '../shared/db/config';
 
-function SaveButton({ docID, isFavorite }) {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const { addToFavorites,   } = useContext(FavoritesContext);
+interface IProps {
+  docID: string;
+  isFavorite: boolean
+}
 
+function SaveButton({ docID, isFavorite }: IProps) {
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { addToFavorites, removeFromFavorites } = useFavoritesProvider();
   const navigate = useNavigate();
 
   const onClick = async () => {

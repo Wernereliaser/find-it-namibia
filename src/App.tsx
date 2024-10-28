@@ -1,4 +1,4 @@
-import { Suspense, lazy, useEffect, useState } from "react";
+import { Suspense, lazy } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { AppContext, useAppContext } from './shared/context/Context';
 import { Loading } from './shared/loading/Loading';
@@ -10,7 +10,6 @@ import { MainApp } from "./shared/model/App";
 import Home from "./pages/home/Home";
 import UserRoutes from "./pages/routes/UserRoutes";
 import CreateListing from "./pages/create-listing/CreateListing";
-import Category from "./pages/category/Category";
 import { ToastContainer } from "react-toastify";
 const LoggedInAdmin = lazy(() => import("./in/LoggedInAdmin"));
 interface IProps {
@@ -57,7 +56,7 @@ const LANDLORD_USER_ROUTES = () => {
         <Route path="/*" element={<UserRoutes />} >
           <Route path="*" element={<Home />} />
         </Route>
-        <Route path="/create-listing" element={<CreateListing />} />
+        <Route path="/create" element={<CreateListing />} />
       </Routes>
     </BrowserRouter>
   );
@@ -97,7 +96,7 @@ const App = observer(() => {
   const { store, api, ui } = app;
 
   return (
-    <div className="App font-sans">
+    <div className="font-sans">
       <AppContext.Provider value={{ store, api, ui }}>
         <MainRoutes />
         <ToastContainer />

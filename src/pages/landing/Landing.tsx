@@ -16,7 +16,7 @@ const Landing = () => {
     }
 
     const onProceed = () => {
-        navigate("/listing")
+        navigate("/listings")
     }
 
     return (

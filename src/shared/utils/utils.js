@@ -5,7 +5,7 @@ export function numberFormat(number) {
 export const formatPrice = (price) => {
     const formattedPrice = new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: 'USD'
+      currency: 'NAD'
     }).format(price);
     return formattedPrice;
   };

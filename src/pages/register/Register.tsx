@@ -43,9 +43,9 @@ const Register = observer(() => {
     }
   };
 
-  const onProceed = () => {
-    navigate("/listing")
-  }
+  // const onProceed = () => {
+  //   navigate("/listing")
+  // }
 
   return (
     <FormContainer>

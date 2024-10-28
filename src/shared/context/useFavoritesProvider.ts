@@ -1,12 +1,11 @@
-import { createContext, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { doc, getDoc, updateDoc, arrayUnion, arrayRemove } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth, db } from '../db/config';
+import { IUser } from '../model/User';
 
-export const FavoritesContext = createContext(null);
-
-export const FavoritesProvider = ({ children }) => {
-  const [favorites, setFavorites] = useState([]);
+const useFavoritesProvider = () => {
+  const [favorites, setFavorites] = useState<string[]>([]);
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
@@ -27,12 +26,15 @@ export const FavoritesProvider = ({ children }) => {
     try {
       const docRef = doc(db, 'users', auth.currentUser.uid);
       const docSnap = await getDoc(docRef);
-      const data = docSnap.data();
+      const data = docSnap.data() as IUser;
       setFavorites(data.favorites);
     } catch (error) { }
   };
 
-  const addToFavorites = async (docID) => {
+  const addToFavorites = async (docID: string) => {
+    if (!auth.currentUser) {
+      return;
+    }
     try {
       const userRef = doc(db, 'users', auth.currentUser.uid);
       await updateDoc(userRef, {
@@ -42,7 +44,10 @@ export const FavoritesProvider = ({ children }) => {
     } catch (error) { }
   };
 
-  const removeFromFavorites = async (docID) => {
+  const removeFromFavorites = async (docID: string) => {
+    if (!auth.currentUser) {
+      return;
+    }
     try {
       const userRef = doc(db, 'users', auth.currentUser.uid);
       await updateDoc(userRef, {
@@ -53,19 +58,10 @@ export const FavoritesProvider = ({ children }) => {
     } catch (error) { }
   };
 
-  const checkFavorite = (docID) => favorites.includes(docID);
+  const checkFavorite = (docID: string) => favorites.includes(docID);
 
-  return (
-    <FavoritesContext.Provider
-      value={{
-        favorites,
-        setFavorites,
-        getUserFavorites,
-        checkFavorite,
-        removeFromFavorites,
-        addToFavorites
-      }}>
-      {children}
-    </FavoritesContext.Provider>
-  );
+  return { favorites, setFavorites, getUserFavorites, checkFavorite, removeFromFavorites, addToFavorites }
+
 };
+
+export default useFavoritesProvider

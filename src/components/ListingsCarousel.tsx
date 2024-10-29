@@ -39,13 +39,13 @@ function ListingsCarousel({ listings, loading }: IProps) {
     >
       {loading &&
         listings.map((item) => (
-          <SwiperSlide key={item.id} className="px-1 py-4">
+          <SwiperSlide key={Math.random()} className="px-1 py-4">
             <ListingItemSkeleton />
           </SwiperSlide>
         ))}
       {!loading &&
         listings.map((item) => (
-          <SwiperSlide key={item.id} className="px-1 py-4">
+          <SwiperSlide key={Math.random()} className="px-1 py-4">
             <ListingItem item={item} />
           </SwiperSlide>
         ))}

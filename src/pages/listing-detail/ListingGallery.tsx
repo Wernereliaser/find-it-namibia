@@ -18,7 +18,7 @@ function ListingGallery({ imgUrls, title }: IProps) {
       pagination={{ clickable: true }}
       className="listing-gallery-carousel">
       {imgUrls.map((imageURL, index) => (
-        <SwiperSlide key={index}>
+        <SwiperSlide key={Math.random()}>
           <img src={imageURL} className="w-full" alt={`${title} of ${index + 1}`} />
         </SwiperSlide>
       ))}

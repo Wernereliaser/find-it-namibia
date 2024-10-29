@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { doc, getDoc } from 'firebase/firestore';
 import ListingInfoCard from './ListingInfoCard';
@@ -7,13 +7,18 @@ import { ReactComponent as MailIcon } from '../../assets/svg/mail.svg';
 import ListingDetailsSkeleton from '../../skeletons/ListingDetailsSkeleton';
 import { auth, db } from '../../shared/db/config';
 import { defaultProperty, IProperty } from '../../shared/model/Property';
+import SaveButton from '../../components/SaveButton';
+import useFavoritesProvider from '../../shared/hooks/useFavoritesProvider';
+import ContactOwnerModal from '../../components/ContactOwnerModal';
 
 function ListingDetail() {
 
   const [listing, setListing] = useState<IProperty>({ ...defaultProperty });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const { listingId } = useParams();
+  const { listingId = 'listingId' } = useParams<{ listingId: string }>();
+  const { checkFavorite } = useFavoritesProvider();
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
   useEffect(() => {
     const getListingData = async () => {
@@ -54,7 +59,7 @@ function ListingDetail() {
   }
 
   return (
-    <>
+    <Fragment>
       <main>
         <div className="w-full h-[32rem] md:h-[35rem] lg:h-[40rem] bg-black">
           <img alt="" src={images[0]} className="w-full h-full object-cover opacity-70" />
@@ -67,20 +72,20 @@ function ListingDetail() {
               </div>
             </div>
             <div className="lg:order-1">
-              {/* {auth.currentUser && auth.currentUser.uid !== listing.userRef ? (
+              {auth.currentUser && auth.currentUser.uid !== listing.uid ? (
                 <SaveButton isFavorite={checkFavorite(listingId)} docID={listingId} />
-              ) : null} */}
+              ) : null}
               {auth.currentUser && auth.currentUser.uid !== listing.uid ? (
                 <button
                   type="button"
                   className="btn btn-accent ml-2"
-                  aria-label="Contact owner">
+                  aria-label="Contact owner"
+                  onClick={() => setIsContactModalOpen(true)}>
                   <MailIcon className="w-6 h-6" />
                 </button>
               ) : null}
-
               <span className="block text-sm text-gray-500 mb-3 mt-4">
-                Posted on : {postedOn}
+                Posted on : {new Date(postedOn).toLocaleString()}
               </span>
               <address className="not-italic text-lg text-gray-900 mb-3">{address}</address>
               <h1 className="text-gray-900 font-extrabold text-5xl mb-8">{title}</h1>
@@ -93,7 +98,14 @@ function ListingDetail() {
           </section>
         </article>
       </main>
-    </>
+      <ContactOwnerModal
+        showModal={isContactModalOpen}
+        hideModal={() => setIsContactModalOpen(false)}
+        docID={listingId}
+        userRef={listing.uid}
+        listingTitle={listing.title}
+      />
+    </Fragment>
   );
 }
 

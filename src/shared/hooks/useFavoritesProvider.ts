@@ -27,7 +27,7 @@ const useFavoritesProvider = () => {
       const docRef = doc(db, 'users', auth.currentUser.uid);
       const docSnap = await getDoc(docRef);
       const data = docSnap.data() as IUser;
-      setFavorites(data.favorites);
+      setFavorites(data.favorites || []);
     } catch (error) { }
   };
 

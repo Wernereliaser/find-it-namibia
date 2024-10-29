@@ -46,11 +46,11 @@ function ForRentSection() {
       </div>
       <div className="col-span-8">
         {loading ? (
-          <ListingsCarousel loading={loading} listings={Array(2).fill(2)} />
+          <ListingsCarousel loading={loading} listings={Array(2).fill(2)} key={Math.random()} />
         ) : error ? (
           <p className="xl:col-span-3 md:col-span-2">{error.message}</p>
         ) : listings.length ? (
-          <ListingsCarousel loading={loading} listings={listings} />
+          <ListingsCarousel loading={loading} listings={listings} key={Math.random()} />
         ) : (
           <EmptyMessage />
         )}

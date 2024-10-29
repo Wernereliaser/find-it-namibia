@@ -48,22 +48,22 @@ function Navbar() {
         user ? (
           <ul className="navbar-dropdown xl:flex xl:items-center xl:justify-end xl:gap-6 xl:static xl:py-0 xl:mt-0 absolute top-full right-0 w-64 xl:w-auto z-50 py-4 bg-white shadow-lg  rounded-md border xl:border-none xl:shadow-none border-gray-200 mt-2">
             <li>
-              <Link to="/profile" className="xl:px-0 px-4 nav-link">
+              <Link to="/user/profile" className="xl:px-0 px-4 nav-link">
                 Profile
               </Link>
             </li>
             <li>
-              <Link to="/create" className="xl:px-0 px-4 nav-link">
-                Create listing
+              <Link to="/user/create" className="xl:px-0 px-4 nav-link">
+                Create
               </Link>
             </li>
             <li>
-              <Link to="/listing" className="xl:px-0 px-4 nav-link">
-                My listings
+              <Link to="/user/view" className="xl:px-0 px-4 nav-link">
+                View
               </Link>
             </li>
             <li>
-              <Link to="/messages" className="xl:px-0 px-4 nav-link">
+              <Link to="/user/messages" className="xl:px-0 px-4 nav-link">
                 Messages
               </Link>
             </li>
@@ -75,11 +75,6 @@ function Navbar() {
           </ul>
         ) : (
           <ul className="navbar-dropdown xl:flex xl:items-center xl:justify-end xl:gap-6 xl:static xl:py-0 xl:mt-0 absolute top-full right-0 w-64 xl:w-auto z-50 py-4 bg-white shadow-lg  rounded-md border xl:border-none xl:shadow-none border-gray-200 mt-2">
-            {/* <li>
-              <Link to="/listings" className="xl:px-0 px-4 nav-link">
-                All
-              </Link>
-            </li> */}
             <li>
               <Link to="category/sale" className="xl:px-0 px-4 nav-link">
                 For Sale

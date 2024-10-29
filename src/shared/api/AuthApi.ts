@@ -27,11 +27,11 @@ export default class AuthApi {
         this.store.auth.setLoading(false);
         return;
       }
-      try {
-        this.handleUserBasicInfo(user.uid);
-      } catch (error) {
-        this.logout();
-      }
+      // try {
+      //   this.handleUserBasicInfo(user.uid);
+      // } catch (error) {
+      //   this.logout();
+      // }
     });
   }
 
@@ -44,7 +44,7 @@ export default class AuthApi {
       const $doc = await getDoc(doc(db, this.path(), uid));
       const data = { uid: $doc.id, ...$doc.data() } as IUser;
       this.store.auth.login(data);
-      this.store.auth.setLoading(false);
+      // this.store.auth.setLoading(false);
     } catch (error) { }
   }
 
@@ -79,6 +79,7 @@ export default class AuthApi {
     try {
       await setPersistence(auth, browserLocalPersistence);
       const credential = await signInWithEmailAndPassword(auth, email, password);
+      this.handleUserBasicInfo(credential.user.uid);
       return credential.user;
     } catch (error) {
       console.log(error);

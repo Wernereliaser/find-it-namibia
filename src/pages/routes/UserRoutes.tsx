@@ -14,6 +14,13 @@ import Login from "../login/Login";
 import Register from "../register/Register";
 import { useAppContext } from "../../shared/context/Context";
 import ListingDetail from "../listing-detail/ListingDetail";
+import PrivateRoute from "./PrivateRoute";
+import CreateListing from "../user-listing/CreateListing";
+import EditListing from "../edit-listing/EditListing";
+import Messages from "../messages/Messages";
+import SavedListings from "../user-listing/SavedListings";
+import Profile from "../profile/Profile";
+import MyListings from "../user-listing/MyListings";
 
 const UserRoutes = observer(() => {
   const [fetchingData, setFetchingData] = useState(true);
@@ -41,7 +48,7 @@ const UserRoutes = observer(() => {
           <header className="px-3">
             <div className="w-full max-w-7xl mx-auto flex items-center py-5">
               <Link
-                to="/listings"
+                to="/home"
                 className="flex items-center gap-2 font-bold text-xl text-gray-900 hover:opacity-90">
                 <Logo className="w-10 h-10 sm:w-7 sm:h-7 text-primary" />
                 <span className="hidden sm:block">Rent or Sell</span>
@@ -52,16 +59,23 @@ const UserRoutes = observer(() => {
           <div className="content">
             <ErrorBoundary>
               <Routes>
-                <Route path="/listings" element={<Home />} />
                 <Route path="/" element={<Landing />} />
+                <Route path="/home" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/forgot-password" element={<ForgotPassword />} />
                 <Route path="/category/:categoryName" element={<CategoryView />} />
-                {/* <Route path="/category/sale" element={<ForSaleSection />} />
-                <Route path="/category/rent" element={<ForRentSection />} /> */}
-                <Route path="/listing/:listingId" element={<ListingDetail />} />
+                <Route path="/view/:listingId" element={<ListingDetail />} />
                 <Route path="*/*" element={<Navigate to={"/"} />} />
+
+                <Route path="/user" element={<PrivateRoute />}>
+                  <Route path="/user/create" element={<CreateListing />} />
+                  <Route path="/user/view" element={<MyListings />} />
+                  <Route path="/user/edit/:listingId" element={<EditListing />} />
+                  <Route path="/user/messages" element={<Messages />} />
+                  <Route path="/user/favorites" element={<SavedListings />} />
+                  <Route path="/user/profile" element={<Profile />} />
+                </Route>
               </Routes >
             </ErrorBoundary>
           </div>

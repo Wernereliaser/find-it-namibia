@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react';
-import { Link, Navigate, useLocation } from 'react-router-dom';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { useAppContext } from '../../shared/context/Context';
 import FormCard from '../../components/FormCard';
 import FormContainer from '../../components/FormContainer';
@@ -10,7 +10,7 @@ import FormHeading from '../../components/FormHeading';
 function Login() {
 
   const { api, store } = useAppContext();
-  const location = useLocation();
+  const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -30,6 +30,7 @@ function Login() {
     setLoading(true);
     const { email, password } = loginForm;
     const $user = await api.auth.login(email, password);
+    navigate("/user/view")
     if (!$user) {
       setErrorMessage('Login failed. Please try again.');
       setLoading(false);
@@ -41,12 +42,12 @@ function Login() {
     setLoading(false);
   };
 
-  if (store.auth.loading) return <Loading fullHeight />;
-  if (store.auth.me && !store.auth.loading) {
-    const state = location.state as { from: Location };
-    if (state && state.from) return <Navigate to={state.from.pathname} />;
-    return <Navigate to="/listings" />;
-  }
+  // if (store.auth.loading) return <Loading fullHeight />;
+  // if (store.auth.me && !store.auth.loading) {
+  //   const state = location.state as { from: Location };
+  //   if (state && state.from) return <Navigate to={state.from.pathname} />;
+  //   return <Navigate to="/home" />;
+  // }
 
   return (
     <FormContainer>

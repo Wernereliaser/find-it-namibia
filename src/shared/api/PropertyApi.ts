@@ -10,12 +10,14 @@ import {
   setDoc,
   orderBy,
   getDocs,
+  addDoc,
 } from "firebase/firestore";
 import { deleteObject, ref } from "firebase/storage";
 import AppApi from "./AppApi";
 import AppStore from "../store/AppStore";
 import { IProperty } from "../model/Property";
 import { db, storage } from "../db/config";
+import { IMessage } from "../../pages/messages/Messages";
 export default class PropertyApi {
   constructor(private api: AppApi, private store: AppStore) { }
 
@@ -85,6 +87,18 @@ export default class PropertyApi {
     try {
       await setDoc(itemRef, item, { merge: true });
       this.store.property.load([item]);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async createMessage(item: IMessage) {
+
+    const messagesRef = collection(db, 'messages');
+    item.id = messagesRef.id;
+
+    try {
+      await addDoc(messagesRef, item);
     } catch (error) {
       console.log(error);
     }

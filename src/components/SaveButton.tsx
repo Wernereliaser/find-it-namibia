@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ReactComponent as HeartOutLineIcon } from '../assets/svg/heart-outline.svg';
 import { ReactComponent as HeartFilledIcon } from '../assets/svg/heart-filled.svg';
-import useFavoritesProvider from '../shared/context/useFavoritesProvider';
+import useFavoritesProvider from '../shared/hooks/useFavoritesProvider';
 import { auth } from '../shared/db/config';
 
 interface IProps {

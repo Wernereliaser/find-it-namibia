@@ -16,7 +16,7 @@ const CategoryView = observer(() => {
   const [data, setData] = useState<IProperty[]>([]);
 
   const [loading, setLoading] = useState(true);
-  const pageTitle = categoryName === 'sale' ? '| Sale' : '| Rent';
+  const pageTitle = categoryName === 'sale' ? 'Sale' : 'Rent';
 
   useEffect(() => {
     setLoading(true)

@@ -35,7 +35,7 @@ const Register = observer(() => {
       await api.auth.register(user);
       setLoading(false);
       toast.success(`Success!`, { autoClose: 500 });
-      navigate("/listing");
+      navigate("/user/profile");
     } catch (error) {
       setErrorMessage('Registration failed. Please try again.');
     } finally {

@@ -25,6 +25,7 @@ function MessageItem({ item }: IProps) {
             </span>
             <h2 className="text-xl font-semibold text-gray-900 mb-4 sm:mb-0">{listingTitle}</h2>
           </div>
+          {isExpanded && <p className="pt-4">{message}</p>}
           <button
             type="button"
             className="btn btn-primary w-full max-w-[200px]"
@@ -32,7 +33,6 @@ function MessageItem({ item }: IProps) {
             {msgBtnLabel}
           </button>
         </div>
-        {isExpanded && <p className="pt-4">{message}</p>}
       </div>
     </div>
   );

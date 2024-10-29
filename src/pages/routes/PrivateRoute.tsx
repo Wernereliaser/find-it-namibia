@@ -1,13 +1,14 @@
 import { Navigate, Outlet } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../../shared/db/config';
+import { Loading } from '../../shared/loading/Loading';
 
 function PrivateRoute() {
   const [user, loading] = useAuthState(auth);
   if (loading) {
     return (
       <div className="min-h-screen max-w-7xl mx-auto px-3 lg:py-24 md:py-20 py-14">
-        <p>Loading....</p>
+        <p><Loading /></p>
       </div>
     );
   }

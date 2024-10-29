@@ -3,21 +3,23 @@ import { useNavigate } from 'react-router-dom';
 import { ReactComponent as HeartOutLineIcon } from '../assets/svg/heart-outline.svg';
 import { ReactComponent as HeartFilledIcon } from '../assets/svg/heart-filled.svg';
 import useFavoritesProvider from '../shared/hooks/useFavoritesProvider';
-import { auth } from '../shared/db/config';
+import { useAppContext } from '../shared/context/Context';
+import { observer } from 'mobx-react-lite';
 
 interface IProps {
   docID: string;
   isFavorite: boolean
 }
 
-function SaveButton({ docID, isFavorite }: IProps) {
+const SaveButton = observer(({ docID, isFavorite }: IProps) => {
 
+  const { store } = useAppContext()
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { addToFavorites, removeFromFavorites } = useFavoritesProvider();
   const navigate = useNavigate();
 
   const onClick = async () => {
-    if (!auth.currentUser) {
+    if (!store.auth.me) {
       navigate('/login');
       return;
     }
@@ -44,6 +46,6 @@ function SaveButton({ docID, isFavorite }: IProps) {
       )}
     </button>
   );
-}
+})
 
 export default SaveButton;

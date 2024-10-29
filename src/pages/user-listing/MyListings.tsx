@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef, Fragment } from 'react';
 import { useCollection } from 'react-firebase-hooks/firestore';
-import { collection, query, where, deleteDoc, doc } from 'firebase/firestore';
-import { toast } from 'react-toastify';
+import { collection, query, where } from 'firebase/firestore';
 import { auth, db } from '../../shared/db/config';
 import ListingItem from '../../components/ListingItem';
 import ListingItemSkeleton from '../../skeletons/ListingItemSkeleton';
@@ -9,8 +8,8 @@ import { IProperty } from '../../shared/model/Property';
 import DeleteConfirmationModal from '../../components/DeleteConfirmationModal';
 import { useAppContext } from '../../shared/context/Context';
 
-
 function MyListings() {
+
   const initalRender = useRef(true);
   const { api } = useAppContext()
   const [listings, setListings] = useState<IProperty[]>([]);
@@ -22,6 +21,23 @@ function MyListings() {
   const [snapshot, loading, error] = useCollection(
     query(collection(db, 'products'), where('uid', '==', auth.currentUser?.uid))
   );
+
+
+  const showConfirmationModal = (item: IProperty) => {
+    setItem(item);
+    setisConfirmationModalOpen(true);
+  };
+
+  const hideConfirmationModal = () => {
+    setisConfirmationModalOpen(false);
+  };
+
+  const onConfirm = async () => {
+    if (item) {
+      await api.property.delete(item)
+      hideConfirmationModal();
+    }
+  };
 
   useEffect(() => {
     document.title = 'My Listings | Rent or Sell';
@@ -52,38 +68,8 @@ function MyListings() {
     } else {
       initalRender.current = false;
     }
-  }, [listingTypeOption]);
+  }, [listingTypeOption, listings]);
 
-  const deleteListing = async (docID: string) => {
-    try {
-      await deleteDoc(doc(db, 'listings', docID));
-      const newFilteredListings = filteredListings.filter((listing) => listing.id !== docID);
-      setFilteredListings(newFilteredListings);
-      const newListings = listings.filter((listing) => listing.id !== docID);
-      setListings(newListings);
-      toast.success('Listing deleted successfully');
-    } catch (error) {
-      toast.error("error");
-    }
-  };
-
-  const showConfirmationModal = () => {
-    setisConfirmationModalOpen(true);
-  };
-
-  const hideConfirmationModal = () => {
-    setisConfirmationModalOpen(false);
-  };
-
-  const onSelectDelete = async (item: IProperty) => {
-    await api.property.delete(item)
-    hideConfirmationModal();
-  };
-
-  const onConfirm = async () => {
-    // await api.property.delete(item)
-    hideConfirmationModal();
-  };
 
   return (
     <Fragment>
@@ -105,7 +91,13 @@ function MyListings() {
             {error && <p className="xl:col-span-3 md:col-span-2">{error.message}</p>}
             {filteredListings.length === 0 && !error ? (<p className="xl:col-span-3 md:col-span-2">No listings to show.</p>) : null}
             {filteredListings.length > 0 && filteredListings.map((item) => (
-              <ListingItem key={item.id} item={item} showDeleteModal={showConfirmationModal} />
+              <ListingItem
+                key={item.id}
+                item={item}
+                showDeleteModal={() => {
+                  showConfirmationModal(item)
+                }}
+              />
             ))}
           </div>
         </section>

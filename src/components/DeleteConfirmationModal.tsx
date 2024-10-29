@@ -10,9 +10,11 @@ interface IProps {
 }
 
 function DeleteConfirmationModal({ showModal, hideModal, onConfirm, message }: IProps) {
+
   if (!showModal) {
     return null;
   }
+
   return createPortal(
     <Fragment>
       <div className="fixed inset-0 z-[999] bg-black opacity-30"></div>

@@ -3,8 +3,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAppContext } from '../context/Context';
 import { ReactComponent as MenuIcon } from '../../assets/svg/menu.svg';
 import { ReactComponent as CloseIcon } from '../../assets/svg/close.svg';
+import { observer } from 'mobx-react-lite';
 
-function Navbar() {
+const Navbar = observer(() => {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const navigate = useNavigate();
   const { store, api } = useAppContext()
@@ -106,6 +107,6 @@ function Navbar() {
       </button>
     </nav>
   );
-}
+})
 
 export default Navbar;

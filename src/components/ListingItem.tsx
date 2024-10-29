@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ReactComponent as BedroomIcon } from '../assets/svg/bed.svg';
 import { ReactComponent as BathroomIcon } from '../assets/svg/bathtub.svg';
 import { ReactComponent as CarIcon } from '../assets/svg/car.svg';
@@ -8,15 +8,13 @@ import { ReactComponent as EditIcon } from '../assets/svg/pen.svg';
 import { formatPrice } from '../shared/utils/utils';
 import { IProperty } from '../shared/model/Property';
 import SaveButton from './SaveButton';
-import { auth } from '../shared/db/config';
 import { useAppContext } from '../shared/context/Context';
 import useFavoritesProvider from '../shared/hooks/useFavoritesProvider';
-import { Fragment, useState } from 'react';
-import DeleteConfirmationModal from './DeleteConfirmationModal';
+import { Fragment } from 'react';
 
 interface IProps {
   item: IProperty;
-  showDeleteModal?: () => void
+  showDeleteModal?: (item: IProperty) => void
 }
 
 function ListingItem({ item, showDeleteModal }: IProps) {
@@ -26,12 +24,14 @@ function ListingItem({ item, showDeleteModal }: IProps) {
   const { address, bathrooms, bedrooms, carspace, id, images, listingSize, regularPrice, title, type } = item
   const listingType = type === 'sale' ? 'For Sale' : 'For Rent';
   const listingPrice = `${formatPrice(regularPrice)} ${type === 'rent' ? '/month' : ''}`;
-  const isOwner = item.uid === auth.currentUser?.uid;
+
   const { checkFavorite } = useFavoritesProvider();
   const isFavorite = checkFavorite(item.id);
+  const navigate = useNavigate()
 
   const onEdit = () => {
     store.property.select(item)
+    navigate(`/user/edit/${id}`)
   };
 
   return (
@@ -86,23 +86,21 @@ function ListingItem({ item, showDeleteModal }: IProps) {
               <Link className="btn btn-primary btn-block mx-0 flex-1" to={`/view/${id}`}>
                 More info
               </Link>
-              {isFavorite && <SaveButton docID={id} isFavorite={isFavorite} />}
+              <SaveButton docID={id} isFavorite={isFavorite} />
             </div>
-
-            {isOwner ? (
+            {showDeleteModal ? (
               <div className="grid grid-cols-2 gap-2 flex-grow">
-                <Link
+                <button
                   aria-label="Edit listing"
                   className="btn btn-secondary btn-block mx-0"
-                  onClick={onEdit}
-                  to={`/user/edit/${id}`}>
+                  onClick={onEdit}>
                   <EditIcon className="w-6 h-6 text-white" />
-                </Link>
+                </button>
                 <button
                   aria-label="Delete listing"
                   className="btn btn-accent btn-block mx-0"
                   type="button"
-                  onClick={showDeleteModal}>
+                  onClick={() => showDeleteModal(item)}>
                   <TrashIcon className="w-7 h-7 text-white" />
                 </button>
               </div>

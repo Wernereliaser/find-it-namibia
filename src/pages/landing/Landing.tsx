@@ -1,46 +1,23 @@
-import { useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 import FormCard from "../../components/FormCard";
 import FormContainer from "../../components/FormContainer";
 import FormHeading from "../../components/FormHeading";
 
 const Landing = () => {
 
-    const navigate = useNavigate();
-
-    const onLogin = () => {
-        navigate("/login")
-    }
-
-    const onRegister = () => {
-        navigate("/register")
-    }
-
-    const onProceed = () => {
-        navigate("/listings")
-    }
-
     return (
         <FormContainer>
             <FormCard>
                 <FormHeading>Find IT Namibia</FormHeading>
-                <button
-                    type="button"
-                    className="btn btn-primary btn-block mx-0 mb-8"
-                    onClick={onLogin}>
+                <Link to="/login" className="btn btn-primary btn-block mx-0 mb-8" >
                     Login
-                </button>
-                <button
-                    type="button"
-                    className="btn btn-primary btn-block mx-0 mb-8"
-                    onClick={onRegister}>
+                </Link>
+                <Link to="/register" className="btn btn-primary btn-block mx-0 mb-8" >
                     Register
-                </button>
-                <button
-                    type="button"
-                    className="btn btn-primary btn-block mx-0 mb-8"
-                    onClick={onProceed}>
+                </Link>
+                <Link to="/home" className="btn btn-primary btn-block mx-0 mb-8">
                     Proceed without account
-                </button>
+                </Link>
             </FormCard>
         </FormContainer>
     )

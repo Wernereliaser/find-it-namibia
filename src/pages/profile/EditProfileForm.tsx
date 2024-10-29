@@ -1,10 +1,10 @@
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { updateProfile } from 'firebase/auth';
 import { doc, updateDoc } from 'firebase/firestore';
 import { toast } from 'react-toastify';
 import TextInput from '../../components/TextInput';
 import { auth, db } from '../../shared/db/config';
-import { defaultUser, IUser } from '../../shared/model/User';
+import { IUser } from '../../shared/model/User';
 import { useAppContext } from '../../shared/context/Context';
 
 function EditProfileForm() {
@@ -26,12 +26,6 @@ function EditProfileForm() {
       toast.error(`error.message`);
     }
   };
-
-  // useEffect(() => {
-  //   if (store.auth.meJson) {
-  //     setUser(store.auth.meJson);
-  //   }
-  // }, [store.auth.meJson]);
 
   return (
     <form onSubmit={onSubmit}>

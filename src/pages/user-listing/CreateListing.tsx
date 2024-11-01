@@ -73,7 +73,7 @@ function CreateListing() {
       updatedImages.splice(index, 1);
       setPreviewImages(updatedImages);
       await api.property.update({ ...item, images: updatedImages })
-      await api.property.deleteImage(previewImages[index])
+      await api.property.deleteFromStorage(previewImages[index])
     } catch (error) {
       console.log(error);
     }

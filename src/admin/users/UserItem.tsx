@@ -1,7 +1,7 @@
-import { useAppContext } from "../../../shared/context/Context";
-import { IUser } from "../../../shared/model/User";
-import showModalFromId from "../../../shared/modal/ModalShow";
-import { MODAL_NAMES } from "../../../shared/model/Constants";
+import { useAppContext } from "../../shared/context/Context";
+import { IUser } from "../../shared/model/User";
+import showModalFromId from "../../shared/modal/ModalShow";
+import { MODAL_NAMES } from "../../shared/model/Constants";
 
 interface IProps {
   user: IUser;
@@ -25,16 +25,12 @@ const UserItem = (props: IProps) => {
             {user.displayName}
           </h6>
         </div>
-
         <div className="uk-flex uk-flex-middle uk-width-1-2 uk-width-1-6@m">
           <p className="role">
             <span className="span-label">User rights</span>
             {user.role}
           </p>
         </div>
-
-        
-
         <div className="uk-flex uk-flex-middle uk-width-1-1 uk-width-1-6@m uk-text-right">
           <div className="controls">
 

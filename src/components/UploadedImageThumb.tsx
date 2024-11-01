@@ -48,10 +48,10 @@ const UploadedImageThumb = (props: IProps) => {
         <div className="grid md:grid-cols-4 grid-cols-2 gap-4">
           {previewImages.map((src, index) => (
             <div key={index}>
-              <button onClick={() => deleteImage(1)} type="button" aria-label="Delete image" className="delete-btn">
+              <button onClick={() => deleteImage(index)} type="button" aria-label="Delete image" className="delete-btn">
                 <DeleteIcon className="h-3 w-3" />
               </button>
-              <img className="w-full h-full border border-gray-200 rounded object-cover" src={src} alt=''/>
+              <img className="w-full h-full border border-gray-200 rounded object-cover" src={src} alt='' />
             </div>
           ))}
         </div>
@@ -59,7 +59,7 @@ const UploadedImageThumb = (props: IProps) => {
       <label className="thumbnail">
         <label htmlFor="images" className="thumbnail-label">
           {isUploading ? "Uploading..." : ""}
-        </label><br/>
+        </label><br />
         <input
           className='input input-bordered'
           type="file"

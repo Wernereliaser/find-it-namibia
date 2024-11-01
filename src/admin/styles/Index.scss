@@ -1,0 +1,46 @@
+@import "./Variables.scss";
+@import "./Loader.scss";
+@import "./Drawer.scss";
+@import"./Layout.scss";
+@import "./NavBar.scss";
+@import "./ErrorBoundary.scss";
+@import "./Main.scss";
+
+:root {
+    --theme-drawer-color: #F0F0F0;
+    --theme-text-color: #1d1e1f;
+    --theme-active-color: #1d1e1f;
+    --theme-primary-color: #0C669A;
+    --theme-layout-color: #ccc;
+    --theme-card-color: #F0F0F0;
+    //
+    --theme-secondary-color: #2e6ac3;
+    --theme-darker-secondary-color: #4365ae;
+    --theme-grey-color: #a9a9ab;
+    --theme-dark-grey-color: #666;
+    --theme-light-grey-color: #ccc;
+    --theme-black-color: #1d1e1f;
+    --theme-white-color: #fff;
+    --theme-hover-color: #ffffdd;
+    --theme-danger-color: #ed1c24;
+}
+
+.dark {
+    --theme-drawer-color: color-mix(in srgb, #fff, #182230 97%);
+    --theme-text-color: #fff;
+    --theme-active-color: #ffffdd;
+    --theme-primary-color: #0C669A;
+    --theme-layout-color: #48515f;
+    --theme-card-color: #ccc;
+
+    //
+    --theme-secondary-color: #2e6ac3;
+    --theme-darker-secondary-color: #4365ae;
+    --theme-grey-color: #a9a9ab;
+    --theme-dark-grey-color: #666;
+    --theme-light-grey-color: #ccc;
+    --theme-black-color: #1d1e1f;
+    --theme-white-color: #fff;
+    --theme-hover-color: #ffffdd;
+    --theme-danger-color: #ed1c24;
+}

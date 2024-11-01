@@ -84,7 +84,7 @@ const UserModal = observer(() => {
                 className="uk-select uk-form-medium"
                 id="user-role"
                 value={user.role}
-                onChange={(e) => setUser({ ...user, role: e.target.value })}>
+                onChange={(e) => setUser({ ...user, role: e.target.value as "Admin" })}>
                 <option value={USER_ROLES.MD_USER}>Managing Director</option>
                 <option value={USER_ROLES.ADMIN_USER}>System Administrator</option>
                 <option value={USER_ROLES.MANAGER_USER}>Manager</option>

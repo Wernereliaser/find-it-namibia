@@ -3,6 +3,8 @@ import AppStore from "../store/AppStore";
 
 export const defaultProperty: IProperty = {
     type: 'rent',
+    status: "pending",
+    availability: "pending",
     title: '',
     description: '',
     address: '',
@@ -13,7 +15,6 @@ export const defaultProperty: IProperty = {
     regularPrice: 0,
     images: [],
     likes: 0,
-
     id: "",
     uid: "",
     postedOn: Date.now(),
@@ -23,7 +24,8 @@ export interface IProperty {
     id: string,
     uid: string,
     postedOn: number,
-
+    status: "approved" | "rejected" | "pending",
+    availability: "available" | "taken" | "pending"
     type: 'sale' | "rent",
     title: string,
     description: string,
@@ -42,6 +44,8 @@ export class Property {
     uid: string;
     postedOn: number;
     type: 'sale' | "rent";
+    status: "approved" | "rejected" | "pending";
+    availability: "available" | "taken" | "pending";
     title: string;
     description: string;
     address: string;
@@ -57,6 +61,8 @@ export class Property {
         this.id = item.id
         this.uid = item.uid
         this.postedOn = item.postedOn
+        this.status = item.status
+        this.availability = item.availability
         this.type = item.type
         this.title = item.title
         this.description = item.description

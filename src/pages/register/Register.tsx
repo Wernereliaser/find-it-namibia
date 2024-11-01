@@ -7,6 +7,77 @@ import FormCard from "../../components/FormCard";
 import FormContainer from "../../components/FormContainer";
 import FormHeading from "../../components/FormHeading";
 import { toast } from "react-toastify";
+import useUploadToStorage from "../../shared/hooks/useUploadToStorage";
+import { ReactComponent as TrashIcon } from '../../assets/svg/trash.svg';
+
+interface IProps {
+  isUploading: boolean;
+  selecteDocuments: File[]
+  setSelectedDocuments: React.Dispatch<React.SetStateAction<File[]>>;
+  deleteDocument: (index: number) => Promise<void>;
+  previewDocuments: string[];
+  setPreviewDocuments: React.Dispatch<React.SetStateAction<string[]>>;
+}
+
+const DocumentThumbnail = (props: IProps) => {
+  const { isUploading, setSelectedDocuments, deleteDocument, selecteDocuments, setPreviewDocuments } = props;
+
+  const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+
+    const files = e.target.files;
+    if (!files) {
+      toast.error(`Failed!`, { autoClose: 500 });
+      return;
+    }
+
+    const selectedFiles: File[] = Array.from(files);
+    setSelectedDocuments(selectedFiles);
+
+    const readerPromises: Promise<string>[] = selectedFiles.map((file) => {
+      return new Promise<string>((resolve) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          const imageSrc = reader.result?.toString() || "";
+          resolve(imageSrc);
+        };
+        reader.readAsDataURL(file);
+      });
+    });
+
+    Promise.all(readerPromises).then((results) => {
+      setPreviewDocuments(results);
+    });
+
+    e.target.value = "";
+  };
+
+  return (
+    <div className="thumbnail">
+      <label htmlFor="Dateiauswählen" className="label thumbnail-label">Documents (ID)</label>
+      <ul>
+        {selecteDocuments.map((doc, index) => (
+          <li key={index + 1}>{index + 1} {doc.name}
+            <button
+              aria-label="Delete listing"
+              className="btn btn-accent btn-block"
+              type="button"
+              onClick={() => deleteDocument(index)}>
+              <TrashIcon className="w-7 h-7 text-white" />
+            </button> </li>
+        ))}
+      </ul>
+      <input
+        className='input input-bordered w-full'
+        type="file"
+        accept="application/pdf"
+        onChange={onFileChange}
+        multiple
+        disabled={isUploading} />
+    </div>
+  );
+};
+
 
 const Register = observer(() => {
 
@@ -19,6 +90,10 @@ const Register = observer(() => {
   const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
+  const { isUploading, uploadFile } = useUploadToStorage();
+  const [selecteDocuments, setSelectedDocuments] = useState<File[]>([]);
+  const [previewDocuments, setPreviewDocuments] = useState<string[]>([]);
+
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
@@ -26,13 +101,23 @@ const Register = observer(() => {
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setErrorMessage('');
+    setLoading(true);
+
     if (user.password !== passwordVerify) {
       setErrorMessage('Passwords do not match');
       return;
     }
-    setLoading(true);
     try {
+
+      const docUrls: string[] = [];
+      for (const doc of selecteDocuments) {
+        const downloadURL = selecteDocuments ? await uploadFile(doc, "/documents") : "";
+        docUrls.push(downloadURL);
+      }
+
+      user.documents = [...user.documents, ...docUrls];
       await api.auth.register(user);
+
       setLoading(false);
       toast.success(`Success!`, { autoClose: 500 });
       navigate("/user/profile");
@@ -43,9 +128,15 @@ const Register = observer(() => {
     }
   };
 
-  // const onProceed = () => {
-  //   navigate("/listing")
-  // }
+  const deleteDocument = async (index: number) => {
+    try {
+      const updatedDocs = [...selecteDocuments];
+      updatedDocs.splice(index, 1);
+      setSelectedDocuments(updatedDocs);
+    } catch (error) {
+      toast.error(`Error!`, { autoClose: 500 });
+    }
+  };
 
   return (
     <FormContainer>
@@ -60,7 +151,7 @@ const Register = observer(() => {
               className="select select-bordered w-full"
               id="user-role"
               value={user.role}
-              onChange={(e) => setUser({ ...user, role: e.target.value })}
+              onChange={(e) => setUser({ ...user, role: e.target.value as "Landlord" | "Tenant" })}
               required>
               <option value={"Landlord"}>Landlord</option>
               <option value={"Tenant"}>Tenant</option>
@@ -149,6 +240,18 @@ const Register = observer(() => {
               <option value={"Windhoek"}>Windhoek</option>
             </select>
           </div>
+          {user.role === "Landlord" && (
+            <div>
+              <DocumentThumbnail
+                selecteDocuments={selecteDocuments}
+                setSelectedDocuments={setSelectedDocuments}
+                isUploading={isUploading}
+                deleteDocument={deleteDocument}
+                previewDocuments={previewDocuments}
+                setPreviewDocuments={setPreviewDocuments}
+              />
+            </div>
+          )}
           <div className="mb-2">
             <label className="label" htmlFor="user-password">
               Create Password

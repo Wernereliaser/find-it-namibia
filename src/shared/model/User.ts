@@ -14,7 +14,8 @@ export const defaultUser: IUser = {
   updatedAt: Date.now(),
   town: "",
   gender: "Male",
-  favorites: []
+  favorites: [],
+  documents: []
 };
 
 export interface IUser {
@@ -22,7 +23,7 @@ export interface IUser {
   displayName: string;
   email: string;
   password?: string;
-  role: string;
+  role: "Landlord" | "Tenant" | "Admin";
   phoneNumber: string;
   photoURL: string | null;
   emailVerified: boolean;
@@ -31,7 +32,8 @@ export interface IUser {
   updatedAt: number;
   town: string;
   gender: string;
-  favorites: string[]
+  favorites: string[];
+  documents: string[]
 }
 
 export class UserModel {

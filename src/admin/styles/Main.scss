@@ -1,0 +1,276 @@
+.btn {
+  font-weight: $font-weight-seven;
+  color: $white-color;
+  border-radius: $border-radius;
+  padding: 0 20px;
+  font-size: $font-size;
+
+  &.primary {
+    background-color: $darker-secondary-color;
+  }
+
+  &.warning {
+    background-color: $danger-color;
+  }
+
+  &.text {
+    padding: 5px;
+    line-height: 18px;
+    font-size: $font-size-xs;
+    transition: all .5s ease-in;
+    text-transform: uppercase;
+    text-decoration: none;
+    background-color: $darker-secondary-color;
+    color: $white-color;
+    border-radius: $border-radius;
+  }
+
+  &.edit {
+    background-color: #a9a9ab;
+    border-radius: 50%;
+    padding: 2px;
+    line-height: 1.5;
+    width: 22px;
+    height: 22px;
+    margin-right: 5px;
+
+    &:hover {
+      background-color: $darker-secondary-color;
+    }
+  }
+
+  &.close {
+    background-color: $danger-color;
+    border-radius: 50%;
+    padding: 2px;
+    line-height: 1.5;
+    width: 22px;
+    height: 22px;
+    margin-right: 5px;
+  }
+
+  &.count {
+    position: relative;
+    display: inline-block;
+    padding: 10px;
+
+    .number {
+      background-color: $darker-secondary-color;
+      color: $white-color;
+      border-radius: 50%;
+      width: 22px;
+      height: 22px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: $font-size;
+      position: absolute;
+      top: -2px;
+      right: -10px;
+    }
+  }
+
+  &.state {
+    border: 1px solid $grey-color;
+    min-width: 90px;
+  }
+
+  &.request {
+    background-color: $request-state-color;
+    color: $dark-grey-color;
+    border-radius: 0;
+    text-transform: capitalize;
+  }
+
+  &.yes {
+    background-color: $success-color;
+    color: $white-color;
+    border-radius: 0;
+    text-transform: capitalize;
+  }
+
+  &.no {
+    background-color: $danger-color;
+    color: $white-color;
+    border-radius: 0;
+    text-transform: capitalize;
+  }
+
+  &.default {
+    background-color: $white-color;
+    color: $dark-grey-color;
+    border-radius: 0;
+    text-transform: capitalize;
+  }
+}
+
+.consent-table {
+  thead {
+    background-color: $darker-secondary-color;
+
+    tr th:last-child {
+      border-top-right-radius: $border-radius;
+    }
+
+    tr th:first-child {
+      border-top-left-radius: $border-radius;
+    }
+
+    tr th {
+      color: $white-color;
+      text-transform: none;
+
+    }
+  }
+
+  .patient-role {
+    .patient-state {
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: $white-color;
+      font-size: $font-size;
+      margin: 3px;
+      ;
+
+      &.accepted {
+        background-color: $success-color;
+      }
+
+      &.rejected {
+        background-color: $danger-color;
+      }
+
+      &.default {
+        background-color: $grey-color;
+      }
+    }
+  }
+}
+
+
+.reveal-content {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.9s ease, max-height 0.9s ease;
+}
+
+.reveal-content.show {
+  opacity: 1;
+  max-height: 500px;
+}
+
+//accordion
+.custom-made-accordion {
+  padding: 10px;
+  background-color: $white-color;
+  border-top: 1px solid #e5e5e5;
+  transition: .2s ease-in-out;
+  transition-property: background-color, border-top;
+  margin-bottom: 3px;
+  border-radius: $border-radius;
+
+  &:hover {
+    background-color: $hover-color;
+    cursor: pointer;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, .15);
+  }
+
+  .position-relative {
+    position: relative;
+    cursor: pointer;
+
+    .custom-title {
+      margin: 3px;
+    }
+
+    .more {
+      position: absolute;
+      right: 0px;
+      top: 50%;
+      transform: translateY(-50%);
+
+      .icon {
+        color: $white-color;
+        transition: all 0.3s ease-in-out;
+        background-color: $grey-color;
+        border-radius: 50%;
+        padding: 2px;
+
+        &.expanded {
+          transform: rotate(180deg);
+          background-color: $darker-secondary-color;
+        }
+      }
+    }
+  }
+
+  .custom-accordion {
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.25s ease-in-out;
+    overflow-y: auto;
+
+    &.expanded {
+      max-height: 2000px;
+
+      &::-webkit-scrollbar {
+        display: none;
+        color: $darker-secondary-color;
+      }
+    }
+  }
+}
+
+//modal
+.uk-modal {
+  .modal {
+    border-radius: $border-radius;
+  }
+}
+
+.doc-grid-display {
+  padding: 15px 10px;
+  background-color: $hover-color;
+
+  .doc-card-item {
+    background-color: $white-color;
+    padding-bottom: 10px;
+
+    .body {
+      padding: 5px;
+
+      .doc-label {
+        font-size: $font-size-sm;
+        text-transform: capitalize;
+        margin-top: 15px;
+      }
+
+      .doc-value {
+        margin: 0;
+        font-weight: $font-weight-six;
+      }
+    }
+
+    &:hover {
+      background-color: #c0e0fa;
+    }
+  }
+}
+
+
+.reveal-accepted-date {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.9s ease, max-height 0.9s ease;
+
+  &.show {
+    opacity: 1;
+    max-height: 500px;
+  }
+}

@@ -69,6 +69,18 @@ const Navbar = observer(() => {
               </Link>
             </li>
             <li>
+              <Link to="/user/favorites" className="xl:px-0 px-4 nav-link">
+                Favorites
+              </Link>
+            </li>
+            {user.role === "Admin" &&
+              <li>
+                <Link to="/admin" className="xl:px-0 px-4 nav-link">
+                  Admin
+                </Link>
+              </li>
+            }
+            <li>
               <button onClick={logOut} type="button" className="xl:px-0 px-4 nav-link">
                 Logout
               </button>

@@ -25,6 +25,23 @@ export default class PropertyApi {
     return "products";
   }
 
+  async getAll() {
+    try {
+      const q = query(collection(db, this.path()));
+      const querySnapshot = await getDocs(q);
+      const data: IProperty[] = [];
+      querySnapshot.forEach((doc) => {
+        data.push({
+          id: doc.id,
+          ...doc.data()
+        } as IProperty);
+      });
+      this.store.property.load(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   async getFilteredCategory(categoryName: string, sortBy: string) {
     try {
       const listingsRef = collection(db, this.path());
@@ -73,7 +90,10 @@ export default class PropertyApi {
 
     const unsubscribe = onSnapshot(doc(db, path, id), (doc) => {
       if (!doc.exists) return;
-      const item = { id: doc.id, ...doc.data() } as IProperty;
+      const item = {
+        id: doc.id,
+        ...doc.data()
+      } as IProperty;
       this.store.property.load([item]);
     });
 
@@ -119,7 +139,7 @@ export default class PropertyApi {
     try {
       await deleteDoc(doc(db, path, item.id));
       item.images.forEach(async (image) =>
-        await this.deleteImage(image)
+        await this.deleteFromStorage(image)
       )
 
       this.store.property.remove(item.id);
@@ -141,8 +161,8 @@ export default class PropertyApi {
     });
   }
 
-  async deleteImage(imageUrl: string) {
-    const imageRef = ref(storage, imageUrl);
+  async deleteFromStorage(fileUrl: string) {
+    const imageRef = ref(storage, fileUrl);
     await deleteObject(imageRef).then(() => { }).catch((error) => {
       console.log(error);
     });

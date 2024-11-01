@@ -21,10 +21,15 @@ import Messages from "../messages/Messages";
 import SavedListings from "../user-listing/SavedListings";
 import Profile from "../profile/Profile";
 import MyListings from "../user-listing/MyListings";
+import AdminPropertiesView from "../../admin/properties/AdminPropertiesView";
+import Dashboard from "../../admin/dashboard/Dashboard";
+import UserList from "../../admin/users/UserList";
+import LoggedInAdmin from "../../admin/LoggedInAdmin";
 
 const UserRoutes = observer(() => {
   const [fetchingData, setFetchingData] = useState(true);
-  const { store } = useAppContext()
+  const { store } = useAppContext();
+  const user = store.auth.meJson
 
   const checkUser = useCallback(async () => {
     setFetchingData(true)
@@ -59,6 +64,7 @@ const UserRoutes = observer(() => {
           <div className="content">
             <ErrorBoundary>
               <Routes>
+
                 <Route path="/" element={<Landing />} />
                 <Route path="/home" element={<Home />} />
                 <Route path="/login" element={<Login />} />
@@ -76,6 +82,15 @@ const UserRoutes = observer(() => {
                   <Route path="/user/favorites" element={<SavedListings />} />
                   <Route path="/user/profile" element={<Profile />} />
                 </Route>
+
+                {user && user.role === "Admin" ? (
+                  <Route path="/admin" element={<LoggedInAdmin />}>
+                    <Route path="/admin/users" element={<UserList />} />
+                    <Route path="/admin/dashboard" element={<Dashboard />} />
+                    <Route path="/admin/properties" element={<AdminPropertiesView />} />
+                  </Route>
+                ) : null}
+
               </Routes >
             </ErrorBoundary>
           </div>

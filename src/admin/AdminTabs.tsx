@@ -40,20 +40,8 @@ const AdminTabs = (props: IProps) => {
         onClickTab={onClickTab}
       />
       <TabItem
-        label="DEPARTMENT"
-        name="Departments"
-        activeTab={activeTab}
-        onClickTab={onClickTab}
-      />
-      <TabItem
-        label="REQUEST"
-        name="Pending Requests"
-        activeTab={activeTab}
-        onClickTab={onClickTab}
-      />
-      <TabItem
-        label="ORGANISATION"
-        name="Organisations"
+        label="PROPERTIES"
+        name="Priperties"
         activeTab={activeTab}
         onClickTab={onClickTab}
       />

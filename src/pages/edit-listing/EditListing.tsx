@@ -35,7 +35,6 @@ function EditListing() {
         }
 
         item.images = [...item.images, ...imageUrls];
-        item.uid = user.uid;
 
         if (selected) await update(item);
         else await create(item);
@@ -73,7 +72,7 @@ function EditListing() {
       updatedImages.splice(index, 1);
       setPreviewImages(updatedImages);
       await api.property.update({ ...item, images: updatedImages })
-      await api.property.deleteImage(previewImages[index])
+      await api.property.deleteFromStorage(previewImages[index])
     } catch (error) {
       setError(error as string);
     }
@@ -136,6 +135,20 @@ function EditListing() {
                       }
                     />
                   </div>
+                </div>
+                <div className="mb-2">
+                  <label className="label" htmlFor="edit-availability">
+                    Availability
+                  </label>
+                  <select
+                    className="select select-bordered w-full"
+                    id="edit-availability"
+                    value={item.availability}
+                    onChange={(e) => setItem({ ...item, availability: e.target.value as "available" | "taken" })}
+                    required>
+                    <option value={"available"}>Available</option>
+                    <option value={"taken"}>Taken</option>
+                  </select>
                 </div>
                 <div>
                   <TextInput

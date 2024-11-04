@@ -1,10 +1,10 @@
-@import "./Variables.scss";
-@import "./Loader.scss";
-@import "./Drawer.scss";
-@import"./Layout.scss";
-@import "./NavBar.scss";
-@import "./ErrorBoundary.scss";
-@import "./Main.scss";
+@use "Variables.scss";
+@use "Loader.scss";
+@use "Drawer.scss";
+@use "Layout.scss";
+@use "NavBar.scss";
+@use "ErrorBoundary.scss";
+@use "Main.scss";
 
 :root {
     --theme-drawer-color: #F0F0F0;

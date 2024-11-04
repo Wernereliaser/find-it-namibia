@@ -1,3 +1,5 @@
+@use "Variables";
+
 .drawer {
   width: 0;
 
@@ -7,7 +9,7 @@
     flex-grow: 0;
     flex-shrink: 0;
     height: 100%;
-    width: $drawer-width;
+    width: Variables.$drawer-width;
     background-color: var(--theme-drawer-color);
   }
 
@@ -50,7 +52,7 @@
           border-radius: 5px;
 
           &:hover {
-            border-left: 3px solid $primary-color;
+            border-left: 3px solid Variables.$primary-color;
             text-decoration: none;
           }
         }

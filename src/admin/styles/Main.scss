@@ -1,28 +1,31 @@
-.btn {
-  font-weight: $font-weight-seven;
-  color: $white-color;
-  border-radius: $border-radius;
-  padding: 0 20px;
-  font-size: $font-size;
+@use "Variables";
+
+.bttn {
+  font-weight: Variables.$font-weight-seven;
+  color: Variables.$white-color;
+  border-radius: Variables.$border-radius;
+  padding: 6px;
+  font-size: Variables.$font-size;
+  margin: 0 10px;
 
   &.primary {
-    background-color: $darker-secondary-color;
+    background-color: Variables.$darker-secondary-color;
   }
 
   &.warning {
-    background-color: $danger-color;
+    background-color: Variables.$danger-color;
   }
 
   &.text {
     padding: 5px;
     line-height: 18px;
-    font-size: $font-size-xs;
+    font-size: Variables.$font-size-xs;
     transition: all .5s ease-in;
     text-transform: uppercase;
     text-decoration: none;
-    background-color: $darker-secondary-color;
-    color: $white-color;
-    border-radius: $border-radius;
+    background-color: Variables.$darker-secondary-color;
+    color: Variables.$white-color;
+    border-radius: Variables.$border-radius;
   }
 
   &.edit {
@@ -35,12 +38,12 @@
     margin-right: 5px;
 
     &:hover {
-      background-color: $darker-secondary-color;
+      background-color: Variables.$darker-secondary-color;
     }
   }
 
   &.close {
-    background-color: $danger-color;
+    background-color: Variables.$danger-color;
     border-radius: 50%;
     padding: 2px;
     line-height: 1.5;
@@ -55,15 +58,15 @@
     padding: 10px;
 
     .number {
-      background-color: $darker-secondary-color;
-      color: $white-color;
+      background-color: Variables.$darker-secondary-color;
+      color: Variables.$white-color;
       border-radius: 50%;
       width: 22px;
       height: 22px;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: $font-size;
+      font-size: Variables.$font-size;
       position: absolute;
       top: -2px;
       right: -10px;
@@ -71,34 +74,34 @@
   }
 
   &.state {
-    border: 1px solid $grey-color;
+    border: 1px solid Variables.$grey-color;
     min-width: 90px;
   }
 
   &.request {
-    background-color: $request-state-color;
-    color: $dark-grey-color;
+    background-color: Variables.$request-state-color;
+    color: Variables.$dark-grey-color;
     border-radius: 0;
     text-transform: capitalize;
   }
 
   &.yes {
-    background-color: $success-color;
-    color: $white-color;
+    background-color: Variables.$success-color;
+    color: Variables.$white-color;
     border-radius: 0;
     text-transform: capitalize;
   }
 
   &.no {
-    background-color: $danger-color;
-    color: $white-color;
+    background-color: Variables.$danger-color;
+    color: Variables.$white-color;
     border-radius: 0;
     text-transform: capitalize;
   }
 
   &.default {
-    background-color: $white-color;
-    color: $dark-grey-color;
+    background-color: Variables.$white-color;
+    color: Variables.$dark-grey-color;
     border-radius: 0;
     text-transform: capitalize;
   }
@@ -106,18 +109,18 @@
 
 .consent-table {
   thead {
-    background-color: $darker-secondary-color;
+    background-color: Variables.$darker-secondary-color;
 
     tr th:last-child {
-      border-top-right-radius: $border-radius;
+      border-top-right-radius: Variables.$border-radius;
     }
 
     tr th:first-child {
-      border-top-left-radius: $border-radius;
+      border-top-left-radius: Variables.$border-radius;
     }
 
     tr th {
-      color: $white-color;
+      color: Variables.$white-color;
       text-transform: none;
 
     }
@@ -131,21 +134,21 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      color: $white-color;
-      font-size: $font-size;
+      color: Variables.$white-color;
+      font-size: Variables.$font-size;
       margin: 3px;
       ;
 
       &.accepted {
-        background-color: $success-color;
+        background-color: Variables.$success-color;
       }
 
       &.rejected {
-        background-color: $danger-color;
+        background-color: Variables.$danger-color;
       }
 
       &.default {
-        background-color: $grey-color;
+        background-color: Variables.$grey-color;
       }
     }
   }
@@ -167,15 +170,15 @@
 //accordion
 .custom-made-accordion {
   padding: 10px;
-  background-color: $white-color;
+  background-color: Variables.$white-color;
   border-top: 1px solid #e5e5e5;
   transition: .2s ease-in-out;
   transition-property: background-color, border-top;
   margin-bottom: 3px;
-  border-radius: $border-radius;
+  border-radius: Variables.$border-radius;
 
   &:hover {
-    background-color: $hover-color;
+    background-color: Variables.$hover-color;
     cursor: pointer;
     box-shadow: 0 5px 12px rgba(0, 0, 0, .15);
   }
@@ -195,15 +198,15 @@
       transform: translateY(-50%);
 
       .icon {
-        color: $white-color;
+        color: Variables.$white-color;
         transition: all 0.3s ease-in-out;
-        background-color: $grey-color;
+        background-color: Variables.$grey-color;
         border-radius: 50%;
         padding: 2px;
 
         &.expanded {
           transform: rotate(180deg);
-          background-color: $darker-secondary-color;
+          background-color: Variables.$darker-secondary-color;
         }
       }
     }
@@ -220,7 +223,7 @@
 
       &::-webkit-scrollbar {
         display: none;
-        color: $darker-secondary-color;
+        color: Variables.$darker-secondary-color;
       }
     }
   }
@@ -229,30 +232,30 @@
 //modal
 .uk-modal {
   .modal {
-    border-radius: $border-radius;
+    border-radius: Variables.$border-radius;
   }
 }
 
 .doc-grid-display {
   padding: 15px 10px;
-  background-color: $hover-color;
+  background-color: Variables.$hover-color;
 
   .doc-card-item {
-    background-color: $white-color;
+    background-color: Variables.$white-color;
     padding-bottom: 10px;
 
     .body {
       padding: 5px;
 
       .doc-label {
-        font-size: $font-size-sm;
+        font-size: Variables.$font-size-sm;
         text-transform: capitalize;
         margin-top: 15px;
       }
 
       .doc-value {
         margin: 0;
-        font-weight: $font-weight-six;
+        font-weight: Variables.$font-weight-six;
       }
     }
 

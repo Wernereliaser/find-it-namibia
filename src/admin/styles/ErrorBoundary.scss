@@ -1,20 +1,22 @@
+@use "Variables";
+
 .error-boundary {
   .title {
     display: inline;
-    font-size: $font-size;
+    font-size: Variables.$font-size;
   }
 
   button {
     display: inline;
-    color: $primary-color;
-    font-size: $font-size-sm;
-    font-weight: $font-weight-six;
+    color: Variables.$primary-color;
+    font-size: Variables.$font-size-sm;
+    font-weight: Variables.$font-weight-six;
     padding: 5px 10px;
     margin-left: 20px;
     transition: 0.3s all ease;
     &:hover {
-      background-color: $primary-color;
-      color: $white-color;
+      background-color: Variables.$primary-color;
+      color: Variables.$white-color;
     }
   }
 }

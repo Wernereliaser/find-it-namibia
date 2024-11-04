@@ -37,8 +37,7 @@ function ForRentSection() {
       <div className="col-span-4 xl:pl-16 text-center xl:text-left xl:order-2">
         <h2 className="text-4xl font-bold text-gray-900 mb-4">For Rent</h2>
         <p className="text-gray-600 leading-loose xl:mb-12 mb-6">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nisi officia expedita et non
-          vero quos.
+          Provide another discription about the site or any information about the selling or renting of properties.
         </p>
         <Link to="/category/rent" className="btn btn-primary w-40 mb-8 xl:mb-0">
           View all

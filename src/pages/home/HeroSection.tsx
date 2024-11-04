@@ -5,7 +5,7 @@ function HeroSection() {
         <section className="relative overflow-hidden bg-gray-900 text-gray-300 px-3 min-h-[40rem] flex items-center justify-center">
             <div className="w-full max-w-7xl text-center py-14">
                 <h1 className="text-white text-4xl lg:text-7xl font-extrabold mb-4">
-                    Rent or sell house at best price.
+                    Rent or sell at best price.
                 </h1>
                 <p className="leading-loose mb-10 max-w-2xl mx-auto">
                     Provide some discription about the site or any information about the selling or renting of properties.

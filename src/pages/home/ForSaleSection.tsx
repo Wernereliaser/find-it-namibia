@@ -37,8 +37,7 @@ function ForSaleSection() {
       <div className="col-span-4 xl:pr-16 text-center xl:text-left">
         <h2 className="text-4xl font-bold text-gray-900 mb-4">For Sale</h2>
         <p className="text-gray-600 leading-loose xl:mb-12 mb-6">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nisi officia expedita et non
-          vero quos.
+          Provide another discription about the site or any information about the selling or renting of properties.
         </p>
         <Link to="/category/sale" className="btn btn-primary w-40 mb-8 xl:mb-0">
           View all
@@ -46,11 +45,11 @@ function ForSaleSection() {
       </div>
       <div className="col-span-8">
         {loading ? (
-          <ListingsCarousel loading={loading} listings={Array(2).fill(2)} key={Math.random()}/>
+          <ListingsCarousel loading={loading} listings={Array(2).fill(2)} key={Math.random()} />
         ) : error ? (
           <p className="xl:col-span-3 md:col-span-2">{error.message}</p>
         ) : listings.length ? (
-          <ListingsCarousel loading={loading} listings={listings} key={Math.random()}/>
+          <ListingsCarousel loading={loading} listings={listings} key={Math.random()} />
         ) : (
           <EmptyMessage />
         )}

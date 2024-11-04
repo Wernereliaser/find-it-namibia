@@ -10,7 +10,7 @@ const AdminPropertiesView = observer(() => {
 
   return (
     <div className="uk-section">
-      <div className="uk-container uk-container-large">
+      <div className="uk-container uk-container-large admin-properties-view">
         <h4>Items</h4>
         <PropertiesTable items={items} />
       </div>

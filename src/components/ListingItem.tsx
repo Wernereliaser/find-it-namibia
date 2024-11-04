@@ -21,7 +21,7 @@ function ListingItem({ item, showDeleteModal }: IProps) {
 
   const { store } = useAppContext();
 
-  const { address, bathrooms, bedrooms, carspace, id, images, listingSize, regularPrice, title, type } = item
+  const { address, bathrooms, bedrooms, carspace, id, images, listingSize, regularPrice, title, type, availability } = item
   const listingType = type === 'sale' ? 'For Sale' : 'For Rent';
   const listingPrice = `${formatPrice(regularPrice)} ${type === 'rent' ? '/month' : ''}`;
 
@@ -81,12 +81,18 @@ function ListingItem({ item, showDeleteModal }: IProps) {
               {listingSize} SQFT
             </span>
           </div>
-          <div className="card-actions">
+          <div className="card-actions flex items-center justify-center">
             <div className="flex gap-2 w-full">
-              <Link className="btn btn-primary btn-block mx-0 flex-1" to={`/view/${id}`}>
-                More info
-              </Link>
-              <SaveButton docID={id} isFavorite={isFavorite} />
+              {availability === "available" ?
+                <div className="flex gap-2 w-full">
+                  <Link className="btn btn-primary btn-block mx-0 flex-1" to={`/view/${id}`}>
+                    More info
+                  </Link>
+                  <SaveButton docID={id} isFavorite={isFavorite} />
+                </div>
+                :
+                <p className="uk-text-uppercase card-title text-gray-900">{availability}</p>
+              }
             </div>
             {showDeleteModal ? (
               <div className="grid grid-cols-2 gap-2 flex-grow">

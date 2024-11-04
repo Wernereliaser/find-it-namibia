@@ -9,6 +9,7 @@ import RadioInput from '../../components/RadioInput';
 import TextAreaInput from '../../components/TextAreaInput';
 import TextInput from '../../components/TextInput';
 import UploadedImageThumb from '../../components/UploadedImageThumb';
+import { Loading } from '../../shared/loading/Loading';
 
 function EditListing() {
 
@@ -41,7 +42,7 @@ function EditListing() {
         setLoading(false);
         onCancel();
         toast.success(`Success!`, { autoClose: 500 });
-        navigate("/listings");
+        navigate("/user/view");
       } catch (error) {
         setError(error as string);
       }
@@ -88,7 +89,7 @@ function EditListing() {
   if (loading) {
     return (
       <div className="min-h-screen max-w-7xl mx-auto px-3 lg:py-24 md:py-20 py-14">
-        <p>Loading....</p>
+        <Loading />
       </div>
     );
   }
@@ -144,9 +145,8 @@ function EditListing() {
                     className="select select-bordered w-full"
                     id="edit-availability"
                     value={item.availability}
-                    onChange={(e) => setItem({ ...item, availability: e.target.value as "available" | "taken" })}
+                    onChange={(e) => setItem({ ...item, availability: e.target.value as "taken" })}
                     required>
-                    <option value={"available"}>Available</option>
                     <option value={"taken"}>Taken</option>
                   </select>
                 </div>

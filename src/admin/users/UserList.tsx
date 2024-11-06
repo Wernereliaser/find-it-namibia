@@ -19,7 +19,7 @@ const UserList = observer(() => {
   return (
     <div className="uk-section">
       <div className="uk-container uk-container-large">
-        <div className="users-list">
+        <div className="admin-users-view">
           <ErrorBoundary>
             {users.sort(sortByName).map((user) => (
               <div key={user.asJson.uid}>

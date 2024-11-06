@@ -27,8 +27,20 @@ const UserItem = (props: IProps) => {
         </div>
         <div className="uk-flex uk-flex-middle uk-width-1-2 uk-width-1-6@m">
           <p className="role">
-            <span className="span-label">User rights</span>
+            <span className="span-label">Role</span>
             {user.role}
+          </p>
+        </div>
+        <div className="uk-flex uk-flex-middle uk-width-1-2 uk-width-1-6@m">
+          <p className="role">
+            <span className="span-label">Email Address</span>
+            {user.email}
+          </p>
+        </div>
+        <div className="uk-flex uk-flex-middle uk-width-1-2 uk-width-1-6@m">
+          <p className="role">
+            <span className="span-label">Cellphone</span>
+            {user.phoneNumber}
           </p>
         </div>
         <div className="uk-flex uk-flex-middle uk-width-1-1 uk-width-1-6@m uk-text-right">

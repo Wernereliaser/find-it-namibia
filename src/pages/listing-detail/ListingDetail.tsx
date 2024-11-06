@@ -87,8 +87,8 @@ function ListingDetail() {
               <span className="block text-sm text-gray-500 mb-3 mt-4">
                 Posted on : {new Date(postedOn).toLocaleString()}
               </span>
+              <h1 className="text-gray-900 font-extrabold text-3xl mb-4">{title}</h1>
               <address className="not-italic text-lg text-gray-900 mb-3">{address}</address>
-              <h1 className="text-gray-900 font-extrabold text-5xl mb-8">{title}</h1>
               <p className="text-gray-600 leading-loose">{description}</p>
             </div>
           </section>

@@ -7,7 +7,7 @@ interface IProps {
 
 function ListingPrice({ regularPrice, type }: IProps) {
   return (
-    <p className="font-bold text-gray-900 text-[2.2rem] md:text-[2.5rem] pb-6 mb-6 border-b border-b-gray-300">
+    <p className="text-gray-900 font-extrabold text-3xl mb-4">
       {formatPrice(regularPrice)}
       {type === 'rent' ? '/month' : null}
     </p>

@@ -45,8 +45,8 @@ function ListingItem({ item, showDeleteModal }: IProps) {
           <img src={images[0]} alt={title} className="w-full h-full object-cover" />
         </figure>
         <div className="card-body text-center p-4 md:p-8">
-          <p className="text-sm mb-3">{address}</p>
           <h2 className="card-title text-gray-900">{title}</h2>
+          <p className="text-sm mb-3">{address}</p>
           <div className="flex items-center justify-center flex-wrap gap-x-6 gap-y-2 font-bold text-[0.75rem] text-gray-900">
             <span className="relative pl-8 min-h-[2.5rem] leading-[2.5rem]">
               <BedroomIcon

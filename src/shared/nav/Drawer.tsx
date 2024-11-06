@@ -17,6 +17,12 @@ const DRAWER_ROUTES = () => {
             Properties
           </NavLink>
         </li>
+        <li className="item">
+          <NavLink to={`users`} className="navlink">
+            <span data-uk-icon="chevron-double-right" className="uk-margin-small-right"></span>
+            Users
+          </NavLink>
+        </li>
       </ul>
     </div>
   );

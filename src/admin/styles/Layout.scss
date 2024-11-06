@@ -22,5 +22,42 @@
   .admin-properties-view {
     background-color: white;
     border-radius: 3px;
+
+  }
+
+  .admin-users-view {
+
+    .user {
+      border-radius: 1.5px;
+      margin: 0;
+      background-color: Variables.$white-color;
+      cursor: pointer;
+      border: 2px solid #fafafa;
+      transition: border 0.3s ease, box-shadow 0.3s ease;
+      padding: 10px;
+
+      &:hover {
+        box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.1);
+        background-color: Variables.$hover-color;
+      }
+
+      .span-label {
+        display: block;
+        font-size: Variables.$font-size-xs;
+        color: Variables.$secondary-color;
+        text-transform: uppercase;
+        margin: 0;
+        line-height: 1;
+        transition: 0.3s ease-in-out all;
+      }
+
+      h6,
+      p {
+        font-weight: Variables.$font-weight-semibold;
+        text-transform: capitalize;
+        color: Variables.$dark-grey-color;
+        font-size: Variables.$font-size;
+      }
+    }
   }
 }

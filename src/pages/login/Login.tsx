@@ -8,7 +8,7 @@ import FormHeading from '../../components/FormHeading';
 
 function Login() {
 
-  const { api } = useAppContext();
+  const { store, api } = useAppContext();
   const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
@@ -18,7 +18,6 @@ function Login() {
     setShowPassword(!showPassword);
   };
 
-  const [loading, setLoading] = useState(false);
   const [loginForm, setLoginForm] = useState({
     email: "",
     password: "",
@@ -26,19 +25,19 @@ function Login() {
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true);
+    store.auth.setLoading(true);
     const { email, password } = loginForm;
     const $user = await api.auth.login(email, password);
     navigate("/home")
     if (!$user) {
       setErrorMessage('Login failed. Please try again.');
-      setLoading(false);
+      store.auth.setLoading(false);
       setTimeout(() => {
         setErrorMessage("");
       }, 3000);
       return;
     }
-    setLoading(false);
+    store.auth.setLoading(false);
   };
 
   return (
@@ -86,7 +85,7 @@ function Login() {
           <button
             type="submit"
             className="btn btn-primary btn-block mx-0 mb-8"
-            disabled={loading}>
+            disabled={store.auth.loading}>
             Login
           </button>
         </form>

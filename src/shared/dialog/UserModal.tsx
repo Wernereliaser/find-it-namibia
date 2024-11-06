@@ -1,22 +1,20 @@
 import { observer } from "mobx-react-lite";
 import { FormEvent, useEffect, useState } from "react";
 import { useAppContext } from "../context/Context";
+import { MODAL_NAMES } from "../model/Constants";
+import { defaultUser, IUser } from "../model/User";
 import { hideModalFromId } from "../modal/ModalShow";
-import { MODAL_NAMES, USER_ROLES } from "../model/Constants";
-import { defaultUser } from "../model/User";
 
 const UserModal = observer(() => {
-  const { api, store } = useAppContext();
 
-  const [user, setUser] = useState({ ...defaultUser });
+  const { store, api } = useAppContext();
   const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState<IUser>(defaultUser);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-
-    await api.user.update(user);;
-
+    await api.user.update(user);
     setLoading(false);
     onCancel();
   };
@@ -33,82 +31,126 @@ const UserModal = observer(() => {
   }, [store.user.selected]);
 
   return (
-    <div className="user-modal uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+    <div className="admin-user-modal uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
       <button
         className="uk-modal-close-default"
         type="button"
         data-uk-close
       ></button>
-      <h3 className="uk-modal-title">User</h3>
       <div className="dialog-content uk-position-relative">
-        <form
-          className="uk-form-stacked uk-grid-small"
-          onSubmit={handleSubmit}
-          data-uk-grid
-        >
-          <div className="uk-width-1-1">
-            <label className="uk-form-label" htmlFor="user-fname">
-              Full name
-            </label>
-            <div className="uk-form-controls">
-              <input
-                className="uk-input uk-form-small"
-                id="user-fname"
-                type="text"
-                value={user.displayName}
-                onChange={(e) => setUser({ ...user, displayName: e.target.value })}
-              />
-            </div>
-          </div>
-
-          <div className="uk-width-1-1">
-            <label className="uk-form-label" htmlFor="user-email">
-              Email
-            </label>
-            <div className="uk-form-controls">
-              <input
-                className="uk-input uk-form-small"
-                id="user-email"
-                type="email"
-                value={user.email}
-                onChange={(e) => setUser({ ...user, email: e.target.value })}
-              />
-            </div>
-          </div>
-          <div className="uk-width-1-1">
-            <label className="uk-form-label" htmlFor="user-role">
+        <form onSubmit={handleSubmit}>
+          <div className="mb-2">
+            <label className="label" htmlFor="admin-user-role">
               Role
             </label>
-            <div className="uk-form-controls">
-              <select
-                className="uk-select uk-form-medium"
-                id="user-role"
-                value={user.role}
-                onChange={(e) => setUser({ ...user, role: e.target.value as "Admin" })}>
-                <option value={USER_ROLES.MD_USER}>Managing Director</option>
-                <option value={USER_ROLES.ADMIN_USER}>System Administrator</option>
-                <option value={USER_ROLES.MANAGER_USER}>Manager</option>
-                <option value={USER_ROLES.SUPERVISOR_USER}>Supervisor</option>
-                <option value={USER_ROLES.EMPLOYEE_USER}>Employee</option>
-                <option value={USER_ROLES.DRIVER_USER}>Driver</option>
-              </select>
-            </div>
+            <select
+              className="select select-bordered w-full"
+              id="admin-user-role"
+              value={user.role}
+              onChange={(e) => setUser({ ...user, role: e.target.value as "Landlord" | "Tenant" | "Admin" })}
+              required>
+              <option value={"Landlord"}>Landlord</option>
+              <option value={"Tenant"}>Tenant</option>
+              <option value={"Admin"}>Admin</option>
+            </select>
           </div>
-          <div className="uk-width-1-1 uk-text-right">
+          <div className="mb-2">
+            <label className="label" htmlFor="admin-user-gender">
+              Gender
+            </label>
+            <select
+              className="select select-bordered w-full"
+              id="admin-user-gender"
+              value={user.gender}
+              onChange={(e) => setUser({ ...user, gender: e.target.value })}
+              required>
+              <option value={"Male"}>Male</option>
+              <option value={"Female"}>Female</option>
+            </select>
+          </div>
+          <div className="mb-2">
+            <label className="label" htmlFor="admin-user-fullname">
+              Full Name
+            </label>
+            <input
+              className="input input-bordered w-full"
+              id="admin-user-fullname"
+              type="text"
+              value={user.displayName}
+              onChange={(e) =>
+                setUser({ ...user, displayName: e.target.value })
+              }
+              required
+            />
+          </div>
+          <div className="mb-2">
+            <label className="label" htmlFor="admin-user-email">
+              Email Address
+            </label>
+            <input
+              className="input input-bordered w-full"
+              id="admin-user-email"
+              type="email"
+              value={user.email}
+              onChange={(e) =>
+                setUser({ ...user, email: e.target.value })
+              }
+              required
+            />
+          </div>
+          <div className="mb-2">
+            <label className="label" htmlFor="admin-user-phoneNumber">
+              Phone Number
+            </label>
+            <input
+              className="input input-bordered w-full"
+              id="admin-user-phoneNumber"
+              type="tel"
+              placeholder="+264"
+              value={user.phoneNumber}
+              onChange={(e) =>
+                setUser({ ...user, phoneNumber: e.target.value })
+              }
+              required
+            />
+          </div>
+          <div className="mb-2">
+            <label className="label" htmlFor="admin-user-town">
+              Town
+            </label>
+            <select
+              className="select select-bordered w-full"
+              id="admin-user-region"
+              value={user.town}
+              onChange={(e) => setUser({ ...user, town: e.target.value })}
+              required>
+              <option value={"Walvis Bay"}>Walvis Bay</option>
+              <option value={"Swakopmund"}>Swakopmund</option>
+              <option value={"Luderitz"}>Luderitz</option>
+              <option value={"Keetmanshoop"}>Keetmanshoop</option>
+              <option value={"Noordoewer"}>Noordoewer</option>
+              <option value={"Oshakati"}>Oshakati</option>
+              <option value={"Otjiwarongo"}>Otjiwarongo</option>
+              <option value={"Okahandja"}>Okahandja</option>
+              <option value={"Tsumeb"}>Tsumeb</option>
+              <option value={"Rundu"}>Rundu</option>
+              <option value={"Windhoek"}>Windhoek</option>
+            </select>
+          </div>
+          <div className="mb-2">
             <button
-              className="btn-text uk-margin-right"
-              type="button"
-              onClick={onCancel}
-            >
-              Cancel
-            </button>
-            <button
-              className="btn btn-primary"
+              className="btn btn-primary w-full"
               type="submit"
               disabled={loading}
-            >
-              Submit {loading && <div data-uk-spinner="ratio: .5"></div>}
-            </button>
+            >Submit</button>
+          </div>
+          <div className="mb-2">
+            <button
+              className="btn btn-accent w-full"
+              type="button"
+              onClick={onCancel}
+              disabled={loading}
+            >Close</button>
           </div>
         </form>
       </div>

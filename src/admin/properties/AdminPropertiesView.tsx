@@ -2,6 +2,7 @@ import { observer } from "mobx-react-lite";
 import PropertiesTable from "./PropertiesTable";
 import { useAppContext } from "../../shared/context/Context";
 import { IProperty } from "../../shared/model/Property";
+import ErrorBoundary from "../../shared/error/ErrorBoundary";
 
 const AdminPropertiesView = observer(() => {
 
@@ -10,9 +11,12 @@ const AdminPropertiesView = observer(() => {
 
   return (
     <div className="uk-section">
-      <div className="uk-container uk-container-large admin-properties-view">
-        <h4>Items</h4>
-        <PropertiesTable items={items} />
+      <div className="uk-container uk-container-xlarge">
+        <div className="admin-properties-view">
+          <ErrorBoundary>
+            <PropertiesTable items={items} />
+          </ErrorBoundary>
+        </div>
       </div>
     </div>
   )

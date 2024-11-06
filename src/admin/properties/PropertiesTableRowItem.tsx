@@ -80,7 +80,7 @@ const PropertiesTableRowItem = observer((props: IProps) => {
             onClick={handleSave}
             disabled={loading}
           >
-            Save
+            <span data-uk-icon="check"></span>
           </button>
           <button
             className="bttn warning"
@@ -88,7 +88,7 @@ const PropertiesTableRowItem = observer((props: IProps) => {
             onClick={handleDelete}
             disabled={loading}
           >
-            Delete
+            <span data-uk-icon="trash"></span>
           </button>
         </td>
       </tr>
@@ -97,5 +97,3 @@ const PropertiesTableRowItem = observer((props: IProps) => {
 });
 
 export default PropertiesTableRowItem
-
-///when admin approves the property, the the status automatically changes to available.

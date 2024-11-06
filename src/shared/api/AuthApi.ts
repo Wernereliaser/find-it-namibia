@@ -21,17 +21,15 @@ export default class AuthApi {
 
   private handleAuthStateChange() {
     onAuthStateChanged(auth, async (user) => {
-      this.store.auth.setLoading(true);
       if (!user) {
         this.logout();
-        this.store.auth.setLoading(false);
         return;
       }
-      // try {
-      //   this.handleUserBasicInfo(user.uid);
-      // } catch (error) {
-      //   this.logout();
-      // }
+      try {
+        this.handleUserBasicInfo(user.uid);
+      } catch (error) {
+        this.logout();
+      }
     });
   }
 
@@ -44,7 +42,6 @@ export default class AuthApi {
       const $doc = await getDoc(doc(db, this.path(), uid));
       const data = { uid: $doc.id, ...$doc.data() } as IUser;
       this.store.auth.login(data);
-      // this.store.auth.setLoading(false);
     } catch (error) { }
   }
 

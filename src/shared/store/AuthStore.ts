@@ -5,12 +5,12 @@ import { IUser, UserModel } from "../model/User";
 export default class AuthStore {
   protected store: AppStore;
   me: UserModel | null = null;
-  loading: boolean = true;
+  loading: boolean = false;
 
   constructor(store: AppStore) {
     makeObservable(this, {
       me: true,
-      loading: true,
+      loading: false,
       meJson: true,
     });
     this.store = store;

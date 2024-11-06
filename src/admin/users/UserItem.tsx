@@ -7,7 +7,7 @@ interface IProps {
   user: IUser;
 }
 const UserItem = (props: IProps) => {
-  const { store } = useAppContext();
+  const { store, api } = useAppContext();
 
   const { user } = props;
 
@@ -15,6 +15,10 @@ const UserItem = (props: IProps) => {
     store.user.select(user);
     showModalFromId(MODAL_NAMES.ADMIN.USER_MODAL);
   };
+  const handleDelete = async () => {
+    if (!window.confirm("Delete user")) return;
+    await api.user.delete(user)
+  }
 
   return (
     <div className={`user uk-card uk-card-body uk-card-small`}>
@@ -45,9 +49,17 @@ const UserItem = (props: IProps) => {
         </div>
         <div className="uk-flex uk-flex-middle uk-width-1-1 uk-width-1-6@m uk-text-right">
           <div className="controls">
-
-            <button className="btn-icon" title="Edit" onClick={handleEdit}>
+            <button
+              className="bttn primary"
+              title="Save"
+              onClick={handleEdit} >
               <span data-uk-icon="pencil"></span>
+            </button>
+            <button
+              className="bttn warning"
+              title="Delete"
+              onClick={handleDelete}>
+              <span data-uk-icon="trash"></span>
             </button>
           </div>
         </div>

@@ -1,14 +1,16 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from '../../shared/db/config';
 import { Loading } from '../../shared/loading/Loading';
+import { useAppContext } from '../../shared/context/Context';
 
 function PrivateRoute() {
-  const [user, loading] = useAuthState(auth);
-  if (loading) {
+
+  const { store } = useAppContext();
+  const user = store.auth.meJson
+
+  if (store.auth.loading) {
     return (
       <div className="min-h-screen max-w-7xl mx-auto px-3 lg:py-24 md:py-20 py-14">
-        <p><Loading /></p>
+        <p><Loading fullHeight /></p>
       </div>
     );
   }
